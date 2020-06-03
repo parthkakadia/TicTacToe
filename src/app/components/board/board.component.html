@@ -1,14 +1,20 @@
-<button mat-stroked-button color="warn" (click)="newGame()">Start new Game</button>
-<br>
+<div fxLayout="column" class="container" fxLayoutGap="20px">
+    <div fxFlex>
+        <button mat-stroked-button color="warn" (click)="newGame()">Start new Game</button>
+    </div>
 
-
-<h2 *ngIf="winner">
-    Player {{winner}} won the game!
-</h2>
-<br>
-
-<h1>Current Player: {{player}}</h1>
-<main>
-    <app-square *ngFor="let val of squares;let i= index" [value]="val" (click)="makeMove(i)">
-    </app-square>
-</main>
+    <div fxFlex>
+        <h3 *ngIf="winner">
+            Player {{winner}} won the game!
+        </h3>
+    </div>
+    <div fxFlex fxFlexAlign="center">
+        <h3>Current Player: {{player}}</h3>
+        <main fxFlexAlign="center" fxLayout="column" fxLayoutGap="0px">
+            <div fxLayout="row" fxLayoutGap="0px" *ngFor=" let row_id of [0, 1, 2] ">
+                <app-square fxFlex.lt-sm="110px" fxFlex.lt-md="150px" fxFlex.gt-md="200px" *ngFor="let val of [0,1,2];let i=index " [value]="value(row_id+3*val) " [gameOver]="gameOver" (click)="makeMove(row_id+3*val) ">
+                </app-square>
+            </div>
+        </main>
+    </div>
+</div>
